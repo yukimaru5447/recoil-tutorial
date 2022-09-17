@@ -1,11 +1,20 @@
 import React, { FC } from 'react'
+import { useRecoilValue } from 'recoil'
+import { addTitleState, addTitleStateLength } from '../states/addTitleState'
 
 export const AddTask:FC = () => {
+
+    // useRecoilValueで値だけを取得する
+    const addTitle = useRecoilValue(addTitleState)
+    const addTitleLength = useRecoilValue(addTitleStateLength)
+
   return (
     <div>
-      <div>5個のタスクがあります</div>
+      <div>{addTitleLength}個のタスクがあります</div>
       <ul>
-        <li>はじめてのタスク</li>
+        {addTitle.map((task) => (
+     <li key={task.id}> {task.title}</li>
+        ))}
       </ul>
     </div>
   )
